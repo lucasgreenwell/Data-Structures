@@ -1,5 +1,5 @@
 from doubly_linked_list import DoublyLinkedList
-
+from doubly_linked_list import ListNode
 
 class LRUCache:
     """
@@ -25,7 +25,16 @@ class LRUCache:
     """
 
     def get(self, key):
-
+        print(self.storage)
+        if self.storage.get(key) != None:
+            node = self.storage[key]
+            # node.value = (key, self.storage.get(key).value[1])
+            # print(self.recently_used.tail.value)
+            self.recently_used.move_to_front(node)
+            self.recently_used.remove_from_tail()
+            return node.value[1]
+        else:
+            return None
 
 
 
@@ -42,10 +51,15 @@ class LRUCache:
 
 
     def set(self, key, value):
-        if self.max_nodes > self.length + 1:
-            self.storage[key] = value
-            self.recently_used.add_to_head((key, value))
-        else:
-            self.storage[key] = value
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.recently_used.move_to_front(node)
+            return
+        if self.length == self.max_nodes:
+            del self.storage[self.recently_used.tail.value[0]]
             self.recently_used.remove_from_tail()
-            self.recently_used.add_to_head((key, value))
+            self.length -= 1
+        self.recently_used.add_to_head((key, value))
+        self.storage[key] = self.recently_used.head
+        self.length += 1
