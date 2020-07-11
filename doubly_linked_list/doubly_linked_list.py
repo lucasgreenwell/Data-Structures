@@ -81,6 +81,7 @@ class DoublyLinkedList:
            self.head.delete()
            self.head = self.head.next
            self.head.prev = None
+
            return return_value
 
 
@@ -127,6 +128,7 @@ class DoublyLinkedList:
         else:
             value = node.value
             node.delete()
+            self.length -= 1
             self.add_to_head(value)
 
     """Removes the input node from its current spot in the 
@@ -135,21 +137,23 @@ class DoublyLinkedList:
         if self.tail == node:
             pass
         else:
+            print(node.value)
             value = node.value
+            # print(value)
             node.delete()
+            self.length -= 1
             self.add_to_tail(value)
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
         if self.head == node and self.tail == node:
-            self.tail == None
-            self.head == None
+            self.remove_from_head()
             node.delete()
         elif self.head == node:
-            self.remove_from_head(node)
+            self.remove_from_head()
         elif self.tail == node:
-            self.remove_from_tail(node)
+            self.remove_from_tail()
         else:
             node.delete()
         
