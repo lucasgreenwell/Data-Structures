@@ -1,9 +1,11 @@
+import math
 class Heap:
     def __init__(self):
         self.storage = []
 
     def insert(self, value):
-        pass
+        self.storage.append(value)
+        self._bubble_up(self.get_size())
 
     def delete(self):
         pass
@@ -12,10 +14,16 @@ class Heap:
         pass
 
     def get_size(self):
-        pass
+        return len(self.storage)
 
     def _bubble_up(self, index):
-        pass
+        children = self.storage[index]
+        parentIndex = math.floor((index - 1) / 2) + 1
+        parent = self.storage[parentIndex]
+        if children > parent:
+            self.storage[index] = parent
+            self.storage[parentIndex] = children
+            self._bubble_up(parentIndex)
 
     def _sift_down(self, index):
         pass
