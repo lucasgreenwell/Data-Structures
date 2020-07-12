@@ -11,13 +11,39 @@ class BinarySearchTree:
         self.right = None
 
     # Insert the given value into the tree
+    # everything in a binary search tree can be done recursively, so let's get trippy
     def insert(self, value):
-        pass
+
+        if value > self.value:
+            if not self.right:
+                self.right = BinarySearchTree(value)
+            else:
+                self.right.insert(value)
+        elif value < self.value:
+            if not self.left:
+                self.left = BinarySearchTree(value)
+            else:
+                self.left.insert(value)
+        else:
+            self.right = BinarySearchTree(value)
+            self.left = BinarySearchTree(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        if target == self.value:
+            print('this should really be resolving to true')
+            return True
+        elif self.value > target:
+            if not self.left:
+                return False
+            else:
+                self.left.contains(target)
+        else:
+            if not self.right:
+                return False
+            else:
+                self.right.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
