@@ -5,7 +5,7 @@ from generic_heap import Heap
 
 class HeapTests(unittest.TestCase):
     def setUp(self):
-        self.heap = Heap()
+        self.heap = Heap(lambda x, y: x < y)
 
     def test_default_heap_insert_works(self):
         self.heap.insert(6)
