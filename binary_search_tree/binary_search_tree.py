@@ -66,8 +66,10 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
+        # print("something")
         if node.left:
             node.left.in_order_print(node.left)
+        print("hello from other methods")
         print(node.value)
         if node.right:
             node.right.in_order_print(node.right)
@@ -77,18 +79,22 @@ class BinarySearchTree:
     # in an iterative breadth first traversal
 
     # https: // www.geeksforgeeks.org / bfs - vs - dfs - binary - tree /
+    # cannot figure out what is broken, it still fails when I do nothing but return the expected output
     def bft_print(self, node):
-        visited = []
+        # print("1\n8\n5\n7\n3\n6\n4\n2\n")
         queue = Queue()
-        visited.append(node)
         queue.enqueue(node)
+        print('hello from breadth first traversal')
         while queue.size > 0:
-            if node.left:
-                queue.enqueue(node.left)
-            elif node.right:
-                queue.enqueue(node.right)
-            current_value = queue.dequeue()
-            print(current_value)
+            current_node = queue.dequeue()
+            print(current_node.value)
+            if current_node.left is not None:
+                queue.enqueue(current_node.left)
+            if current_node.right is not None:
+                queue.enqueue(current_node.right)
+
+
+
 
 
 
@@ -109,3 +115,24 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+
+# Testing
+bst = BinarySearchTree(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+bst.bft_print(bst)
+bst.dft_print(bst)
+print("elegant methods")
+print("pre order")
+bst.pre_order_dft(bst)
+print("in order")
+bst.in_order_dft(bst)
+print("post order")
+bst.post_order_dft(bst)

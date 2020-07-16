@@ -84,8 +84,22 @@ class DoublyLinkedList:
 
            return return_value
 
+    def remove_from_head_for_bst(self):
+        if not self.head and not self.tail:
+            return None
+        self.length -= 1
+        if self.head == self.tail:
+            return_value = ListNode(self.head.value)
+            self.head = None
+            self.tail = None
+            return return_value
+        else:
+            return_value = ListNode(self.head.value)
+            self.head.delete()
+            self.head = self.head.next
+            self.head.prev = None
 
-
+            return return_value
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
